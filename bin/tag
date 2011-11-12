@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'tag'
+Tag::Runner.start
