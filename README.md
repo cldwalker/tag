@@ -33,4 +33,5 @@ Todo
 * Several more tag actions
 * Description and time fields
 * Make storage agnostic
+* Switch from thor to boson
 * Explain how to integrate with other commandline apps
