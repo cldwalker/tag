@@ -20,13 +20,29 @@ module Tag
     def tag(item, tag)
       @hash[tag] ||= []
       @hash[tag] << item
+    end
+
+    def multi_tag(items, tags)
+      tags.each do |tag|
+        items.each do |item|
+          tag(item, tag)
+        end
+      end
+      save
+    end
+
+    def multi_remove_tag(items, tags)
+      tags.each do |tag|
+        items.each do |item|
+          remove_tag(item, tag)
+        end
+      end
       save
     end
 
     def remove_tag(item, tag)
       @hash[tag] ||= []
       @hash[tag].delete item
-      save
     end
 
     def list(tag)
@@ -55,14 +71,16 @@ module Tag
   end
 
   class Runner < Thor
-    desc "add ITEM TAG", 'tag an item'
-    def add(item, tag)
-      Tag.store.tag(item, tag)
+    method_option :tags, :type => :array, :required => true, :aliases => '-t'
+    desc "add *ITEMS -t *TAGS", 'add tag(s) to item(s)'
+    def add(*items)
+      Tag.store.multi_tag(items, options[:tags])
     end
 
-    desc "rm ITEM TAG", 'remove tag from item'
-    def rm(item, tag)
-      Tag.store.remove_tag(item, tag)
+    method_option :tags, :type => :array, :required => true, :aliases => '-t'
+    desc "rm *ITEMS -t *TAGS", 'remove tag(s) from item(s)'
+    def rm(*items)
+      Tag.store.multi_remove_tag(items, options[:tags])
     end
 
     desc "list TAG", 'list items by tag'
