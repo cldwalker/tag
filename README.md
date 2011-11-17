@@ -29,7 +29,6 @@ Contributing
 Todo
 ====
 
-* Tests!
 * Several more tag actions
 * Description and time fields
 * Make storage agnostic

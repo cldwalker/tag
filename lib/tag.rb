@@ -6,7 +6,7 @@ module Tag
 
   class Store
     class << self; attr_accessor :file; end
-    self.file = Dir.home + '/.tagrc'
+    self.file = ENV['TAGRC'] || Dir.home + '/.tagrc'
 
     def initialize
       @file = self.class.file
