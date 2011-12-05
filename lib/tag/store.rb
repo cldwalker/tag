@@ -2,11 +2,10 @@ require 'yaml'
 
 module Tag
   class Store
-    class << self; attr_accessor :file; end
-    self.file = ENV['TAGRC'] || Dir.home + '/.tagrc'
 
-    def initialize
-      @file = self.class.file
+    def initialize(model = nil)
+      model ||= ENV['TAG_MODEL'] || 'default'
+      @file = File.join(Tag.home, "#{model}.yml")
       @hash = File.exists?(@file) ? YAML.load_file(@file) : {}
     end
 

@@ -4,7 +4,7 @@ require 'tag'
 require 'open3'
 require 'fileutils'
 
-ENV['TAGRC'] = File.dirname(__FILE__) + '/.tagrc'
+ENV['TAG_HOME'] = File.dirname(__FILE__) + '/.tag'
 
 module TestHelpers
   attr_reader :stdout, :stderr, :process
@@ -22,4 +22,4 @@ class MiniTest::Unit::TestCase
   include TestHelpers
 end
 
-MiniTest::Unit.after_tests { FileUtils.rm_f(ENV['TAGRC']) }
+MiniTest::Unit.after_tests { FileUtils.rm_rf(ENV['TAG_HOME']) }

@@ -6,7 +6,7 @@ describe Tag::Runner do
     stdout.split("\n")
   end
 
-  before { FileUtils.rm_f(ENV['TAGRC']) }
+  before { FileUtils.rm_rf(ENV['TAG_HOME']) }
 
   describe "add" do
     it "adds a tag" do
@@ -28,6 +28,20 @@ describe Tag::Runner do
     it "fails if no tag given" do
       tag 'add um'
       stderr.must_include 'required option'
+    end
+
+    it "with model option adds to a different model" do
+      tag 'add feynman -t physicist -m physics'
+      tagged('physicist -m physics').must_equal ['feynman']
+      tagged('physicist').must_equal []
+    end
+
+    it "with $TAG_MODEL adds to a different model" do
+      ENV['TAG_MODEL'] = 'physica'
+      tag 'add feynman -t physicist'
+      tagged('physicist').must_equal ['feynman']
+      tagged('physicist -m default').must_equal []
+      ENV['TAG_MODEL'] = nil
     end
   end
 
@@ -58,6 +72,13 @@ describe Tag::Runner do
       tag 'rm um'
       stderr.must_include 'required option'
     end
+
+    it "with model option removes a tag from other model" do
+      tag 'add newton -t physicist fig -m physics'
+      tag 'rm newton -t fig -m physics'
+      tagged('physicist -m physics').must_equal ['newton']
+      tagged('physicist').must_equal []
+    end
   end
 
   describe "tags" do
@@ -67,7 +88,15 @@ describe Tag::Runner do
       stdout.split("\n").must_equal %w{german irish italian}
     end
 
-    it "with rm option delets tags" do
+    it "with model option lists all tags for another model" do
+      tag 'add fermi -t italian german irish -m physicist'
+      tag 'tags -m physicist'
+      stdout.split("\n").must_equal %w{german irish italian}
+      tag 'tags'
+      stdout.split("\n").must_equal []
+    end
+
+    it "with rm option deletes tags" do
       tag 'add fermi -t italian german irish'
       tag 'add davinci -t italian german irish'
       tag 'tags german irish --rm'
