@@ -8,13 +8,28 @@ In making tags a first class nix citizen, perhaps they will see the light of day
 Examples
 ========
 
-    $ tag add horse animal
-    $ tag add cat animal
-    $ tag list animal
+Let's start with tagging animals:
+
+    $ tag add horse -t fast strong
+    $ tag add cat -t fast independent
+    $ tag add dog -t loving
+    $ tag list fast
     horse
     cat
 
-    # TODO
+Tired of animals, let's tag cities. To avoid interfering with
+the animals list, we'll use a cities model:
+
+    $ tag add nyc -t fast fun -m cities
+    $ tag add boston -t educated clean -m cities
+    $ tag add paris -t awesome delicious
+    $ tag list fast -m cities
+    nyc
+    # to avoid typing '-m cities' for every command
+    $ export TAG_MODEL=cities
+
+Since models are isolated from one another, third party commandline apps can
+use tag for their own private tagging purposes.
 
 Motivation
 ==========

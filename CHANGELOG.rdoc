@@ -1,2 +1,5 @@
-= 0.1.0
+== 0.2.0
+* Add models (tagging for multiple objects or apps)
+
+== 0.1.0
 * Something works!
