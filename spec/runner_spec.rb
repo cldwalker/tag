@@ -112,4 +112,11 @@ describe Tag::Runner do
       'parent1', '    child', 'parent2', '    child'
     ].join("\n")
   end
+
+  it "models prints list of models" do
+    tag 'add feynman -t funny -m physicist'
+    tag 'add cat -t independent'
+    tag 'models'
+    stdout.split("\n").must_equal ['default', 'physicist']
+  end
 end

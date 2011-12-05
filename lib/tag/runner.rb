@@ -42,5 +42,10 @@ module Tag
     def tree
       puts Tag.store(options[:model]).tree
     end
+
+    desc "models", 'list models'
+    def models
+      puts Tag::Store.models
+    end
   end
 end

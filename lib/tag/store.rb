@@ -3,6 +3,10 @@ require 'yaml'
 module Tag
   class Store
 
+    def self.models
+      Dir["#{Tag.home}/*.yml"].map {|file| file[%r{([^/]+).yml$}, 1] }.sort
+    end
+
     def initialize(model = nil)
       model ||= ENV['TAG_MODEL'] || 'default'
       @file = File.join(Tag.home, "#{model}.yml")
