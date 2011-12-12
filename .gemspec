@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.executables  = %w(tag)
   s.add_dependency 'thor', '~> 0.14.6'
+  s.add_development_dependency 'bahia', '~> 0.1'
   s.files = Dir.glob(%w[{lib,spec}/**/*.rb bin/* [A-Z]*.{txt,rdoc,md} ext/**/*.{rb,c} **/deps.rip]) + %w{Rakefile .gemspec}
   s.extra_rdoc_files = ["README.md", "LICENSE.txt"]
   s.license = 'MIT'
