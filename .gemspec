@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 require 'rubygems' unless Object.const_defined?(:Gem)
-require File.dirname(__FILE__) + "/lib/tag"
+require File.dirname(__FILE__) + "/lib/tag/version"
 
 Gem::Specification.new do |s|
   s.name        = "tag"

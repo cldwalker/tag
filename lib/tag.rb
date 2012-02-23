@@ -1,10 +1,9 @@
 require 'tag/runner'
 require 'fileutils'
 require 'tag/store'
+require 'tag/version'
 
 module Tag
-  VERSION = '0.2.0'
-
   def self.store(model = nil)
     @store ||= Store.new(model)
   end
