@@ -1,35 +1,38 @@
-require 'thor'
+require 'boson/runner'
 
 module Tag
-  class Runner < Thor
+  class Runner < Boson::Runner
     def self.model_option
-      method_option :model, :type => :string, :aliases => '-m'
+      option :model, :type => :string
     end
 
     model_option
-    method_option :tags, :type => :array, :required => true, :aliases => '-t'
-    desc "add *ITEMS -t *TAGS", 'add tag(s) to item(s)'
+    option :tags, :type => :array, :required => true
+    desc 'add tag(s) to item(s)'
     def add(*items)
+      options = items[-1].is_a?(Hash) ? items.pop : {}
       Tag.store(options[:model]).multi_tag(items, options[:tags])
     end
 
     model_option
-    method_option :tags, :type => :array, :required => true, :aliases => '-t'
-    desc "rm *ITEMS -t *TAGS", 'remove tag(s) from item(s)'
+    option :tags, :type => :array, :required => true
+    desc 'remove tag(s) from item(s)'
     def rm(*items)
+      options = items[-1].is_a?(Hash) ? items.pop : {}
       Tag.store(options[:model]).multi_remove_tag(items, options[:tags])
     end
 
     model_option
-    desc "list TAG", 'list items by tag'
-    def list(tag)
+    desc 'list items by tag'
+    def list(tag, options={})
       puts Tag.store(options[:model]).list(tag)
     end
 
     model_option
-    method_option :rm, :type => :boolean, :desc => 'remove tags'
-    desc "tags", 'list or remove tags'
+    option :rm, :type => :boolean, :desc => 'remove tags'
+    desc 'list or remove tags'
     def tags(*args)
+      options = args[-1].is_a?(Hash) ? args.pop : {}
       if options[:rm]
         Tag.store(options[:model]).delete_tags(*args)
       else
@@ -38,12 +41,12 @@ module Tag
     end
 
     model_option
-    desc "tree", 'print tags with their items underneath them'
-    def tree
+    desc 'print tags with their items underneath them'
+    def tree(options={})
       puts Tag.store(options[:model]).tree
     end
 
-    desc "models", 'list models'
+    desc 'list models'
     def models
       puts Tag::Store.models
     end
