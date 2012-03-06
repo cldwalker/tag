@@ -10,8 +10,8 @@ Examples
 
 Let's start with tagging animals:
 
-    $ tag add horse -t fast strong
-    $ tag add cat -t fast independent
+    $ tag add horse -t fast,strong
+    $ tag add cat -t fast,independent
     $ tag add dog -t loving
     $ tag list fast
     horse
@@ -21,8 +21,8 @@ Tired of animals, let's tag cities. To avoid interfering with
 the animals list, we'll use a cities model:
 
     $ tag add nyc -t fast fun -m cities
-    $ tag add boston -t educated clean -m cities
-    $ tag add paris -t awesome delicious
+    $ tag add boston -t educated,clean -m cities
+    $ tag add paris -t awesome,delicious
     $ tag list fast -m cities
     nyc
     # to avoid typing '-m cities' for every command
@@ -47,5 +47,4 @@ Todo
 * Several more tag actions
 * Description and time fields
 * Make storage agnostic
-* Switch from thor to boson
 * Explain how to integrate with other commandline apps
