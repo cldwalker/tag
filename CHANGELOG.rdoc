@@ -1,3 +1,6 @@
+== 0.3.0
+* Switch out thor for boson
+
 == 0.2.1
 * Fix gemspec loading
 * Update dev dependencies
