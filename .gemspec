@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.executables  = %w(tag)
   s.add_dependency 'boson', '~> 1.0'
-  s.add_development_dependency 'bahia', '~> 0.4.0'
+  s.add_development_dependency 'bahia', '~> 0.5.0'
   s.add_development_dependency 'minitest', '~> 2.11.0'
   s.add_development_dependency 'rake', '~> 0.9.2'
   s.files = Dir.glob(%w[{lib,spec}/**/*.rb bin/* [A-Z]*.{txt,rdoc,md} ext/**/*.{rb,c} **/deps.rip]) + %w{Rakefile .gemspec .travis.yml}

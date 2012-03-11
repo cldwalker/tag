@@ -2,3 +2,5 @@ before_install: bundle init --gemspec=.gemspec
 rvm:
 - 1.9.2
 - 1.9.3
+- rbx-19mode
+- jruby-19mode
