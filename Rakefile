@@ -29,8 +29,10 @@ end
 
 desc 'Run tests'
 task :test do |t|
-  ENV['RUBYLIB'] = ['lib', ENV['RUBYLIB']].compact.join(':')
-  sh 'testrb spec/*_spec.rb'
+  # workaround jruby 1.6.7 bug
+  sh 'bundle exec ruby -Ilib spec/runner_spec.rb'
+  # ENV['RUBYLIB'] = ['lib', ENV['RUBYLIB']].compact.join(':')
+  # sh 'testrb spec/*_spec.rb'
 end
 
 task :default => :test
