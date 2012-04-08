@@ -1,3 +1,6 @@
+== 0.4.0
+* Add items command
+
 == 0.3.0
 * Switch out thor for boson
 
