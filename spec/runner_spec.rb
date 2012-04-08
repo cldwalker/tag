@@ -119,4 +119,11 @@ describe Tag::Runner do
     tag 'models'
     stdout.split("\n").must_equal ['default', 'physicist']
   end
+
+  it "items prints items with tags" do
+    tag 'add feynman -t funny'
+    tag 'add einstein -t bighead,postal'
+    tag 'items'
+    stdout.split("\n").must_equal ["einstein\tbighead, postal", "feynman\tfunny"]
+  end
 end

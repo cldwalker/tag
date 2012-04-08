@@ -50,5 +50,10 @@ module Tag
     def models
       puts Tag::Store.models
     end
+
+    desc 'list all items with their tags'
+    def items
+      puts Tag.store.items
+    end
   end
 end

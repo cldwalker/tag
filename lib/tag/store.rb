@@ -64,5 +64,15 @@ module Tag
       tags.each {|tag| @hash.delete(tag) }
       save
     end
+
+    def items
+      @hash.each_with_object({}) do |(tag,items),acc|
+        items.each do |item|
+          (acc[item] ||= []) << tag
+        end
+      end.sort_by {|e| e[0] }.map do |k,v|
+        "#{k}\t#{v.uniq.join(', ')}"
+      end
+    end
   end
 end

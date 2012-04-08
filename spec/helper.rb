@@ -1,5 +1,6 @@
 gem 'minitest' unless ENV['NO_RUBYGEMS']
 require 'minitest/spec'
+require 'minitest/autorun' unless $0.end_with?('/m')
 require 'tag'
 require 'fileutils'
 require 'bahia'
